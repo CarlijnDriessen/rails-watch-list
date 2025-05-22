@@ -38,3 +38,5 @@ Movie.create!(title: "Whiplash", overview: "A young drummer enrolls at a music c
 
 # 3. Display a message 🎉
 puts "Finished! Created #{Movie.count} movies."
+
+
