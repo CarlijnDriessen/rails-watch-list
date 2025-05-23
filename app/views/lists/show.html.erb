@@ -6,30 +6,29 @@
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Add a movie
-</button>
+<div class="d-flex justify-content-end m-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add a movie
+  </button>
+</div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add a movie</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for [@list, @bookmark] do |f| %>
-          <%= f.association :movie, prompt: "Choose a Movie" %>
-          <%= f.input :comment %>
-          <%= f.submit class:"btn btn-primary" %>
-        <% end %>
+      <%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.association :movie, prompt: "Choose a Movie" %>
+        <%= f.input :comment %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <%= f.submit class:"btn btn-primary" %>
+      <% end %>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -52,7 +51,7 @@
               </div>
               <p class="text-secondary"><%= bookmark.movie.overview %></p>
             </div>
-            <div class="bookmark-card-comment">
+            <div class="bookmark-card-comment d-flex flex-column justify-content-between">
               <div class="d-flex justify-content-between">
                 <div class="d-flex">
                   <i class="fa-solid fa-quote-left"></i>
@@ -112,7 +111,7 @@
           <h4>Add your review</h4>
           <%= simple_form_for [@list, @review] do |f| %>
             <%= f.input :comment %>
-            <%= f.input :rating %>
+            <%= f.input :rating, collection: [1,2,3,4,5], prompt: "Select a rating (1-5)" %>
             <%= f.submit class:"btn btn-primary" %>
           <% end %>
         </div>
