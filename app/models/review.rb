@@ -2,6 +2,6 @@ class Review < ApplicationRecord
   belongs_to :list
 
   validates :comment, :rating, presence: true
-  validates :rating, inclusion: { in: 0..5 }
-  validates :rating, numericality: { only_integer: true }
+  validates :rating, inclusion: { in: 1..5, message: "must be between 1 and 5" }
+  validates :rating, numericality: { only_integer: true, message: "must be a number" }
 end

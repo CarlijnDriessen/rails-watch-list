@@ -1,7 +1,7 @@
 <div class="banner">
   <div class="container">
     <h1>Save your favorite movies</h1>
-    <p>Everything organized conveniently in one place.</p>
+    <p class="px-3">Everything organized conveniently in one place.</p>
   </div>
 </div>
 
@@ -12,3 +12,10 @@
     <li><%= link_to list.name, list_path(list) %></li>
   <% end %>
 </ul>
+
+<div class="d-flex justify-content-center mx-auto mt-5">
+  <%= simple_form_for(@list) do |f| %>
+    <%= f.input :name %>
+  <%= f.submit %>
+  <% end %>
+</div>

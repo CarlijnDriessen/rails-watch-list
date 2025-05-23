@@ -5,7 +5,7 @@
 
 .cards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
   margin-right: 30px;
 }
@@ -34,22 +34,21 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .cards {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .cards {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 .bookmark-card {
-  overflow: hidden;
+  // overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  height: 550px;
 }
 
 .bookmark-card > img {
@@ -71,14 +70,18 @@
 
 .bookmark-card-details {
   padding: 16px;
+  // position: relative;
+  height: 150px;
+}
+
+.bookmark-card-comment {
+  // position: absolute;
+  bottom: 5px;
+  width: 100%;
 }
 
 .bookmark-card-details h6 {
   font-size: small;
-}
-
-.bookmark-card-comment {
-  vertical-align: bottom;
 }
 
 .movie-form {

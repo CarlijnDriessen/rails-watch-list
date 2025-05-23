@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_action :set_list, only: [:create]
+  before_action :set_list, only: :create
   before_action :set_bookmark, only: :destroy
 
   def create
@@ -8,7 +8,8 @@ class BookmarksController < ApplicationController
     if @bookmark.save
       redirect_to list_path(@list)
     else
-      render 'lists/show', status: :unprocessable_entity
+      @review = Review.new
+      render "lists/show", status: :unprocessable_entity
     end
   end
 
