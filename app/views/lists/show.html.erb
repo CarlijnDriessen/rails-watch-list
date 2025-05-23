@@ -1,6 +1,39 @@
-<h1><%= @list.name %></h1>
+<div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @list.photo.key, crop: :fill %>')">
+  <div class="nav"><%= link_to "My lists", lists_path, class: "nav-text" %></div>
+  <div class="banner-container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Add a movie
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add a movie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [@list, @bookmark] do |f| %>
+          <%= f.association :movie, prompt: "Choose a Movie" %>
+          <%= f.input :comment %>
+          <%= f.submit class:"btn btn-primary" %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="bookmarks-container my-5">
   <div class="movies-container d-flex">
@@ -53,29 +86,37 @@
 
   <div class="border-bottom my-5"></div>
 
-  <div class="review-container d-flex justify-content-between">
-    <div class="existing-reviews-container w-50 mr-3">
-      <h2>Reviews</h2>
-      <% if @list.reviews.count > 0 %>
-        <% @list.reviews.each do |review| %>
-          <p><%= review.rating %></p>
-          <em><%= time_ago_in_words(review.created_at) %> ago</em>
-          <p><%= review.comment %></p>
-          <%# <%= link_to "Delete", review_path(review),
-          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-          <div class="border-bottom my-2 w-100"></div>
-        <% end %>
-        <% else %>
-          <%= "There are no reviews for this list yet!" %>
-      <% end %>
-    </div>
-    <div class="review-form d-flex flex-column mt-5 w-50 p-2">
-      <h4>Add your review</h4>
-      <%= simple_form_for [@list, @review] do |f| %>
-        <%= f.input :comment %>
-        <%= f.input :rating %>
-        <%= f.submit class:"btn btn-primary" %>
-      <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="existing-reviews-container mr-3">
+          <h2>Reviews</h2>
+          <% if @list.reviews.count > 0 %>
+            <% @list.reviews.each do |review| %>
+              <% review.rating.times do %>
+                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+              <% end %>
+              <em class="time-ago"><%= time_ago_in_words(review.created_at) %> ago</em>
+              <p><%= review.comment %></p>
+              <%# <%= link_to "Delete", review_path(review),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <div class="border-bottom my-2 w-100"></div>
+            <% end %>
+            <% else %>
+              <%= "There are no reviews for this list yet!" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="review-form d-flex flex-column mt-5 p-2">
+          <h4>Add your review</h4>
+          <%= simple_form_for [@list, @review] do |f| %>
+            <%= f.input :comment %>
+            <%= f.input :rating %>
+            <%= f.submit class:"btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
